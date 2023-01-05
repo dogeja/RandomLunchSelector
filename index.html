@@ -1,23 +1,132 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>점심선택기</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./s.png">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./s.png" />
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+      * {
+        font-family: "Pretendard-Regular";
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .button {
+        background-color: transparent;
+        font-size: 18px;
+        box-sizing: content-box;
+        transition: 0.3s ease;
+        padding: 1.15rem;
+      }
+      .mv_wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        position: relative;
+        background-color: beige;
+        text-align: center;
+      }
+      h1 {
+        font-size: 36px;
+        margin-bottom: 48px;
+      }
+      .button:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+        border: rgba(0, 0, 0, 0.4) 2px solid;
+        transform: translateY(-2px);
+      }
+      .button:active {
+        background-color: rgba(0, 0, 0, 0.65);
+        border: transparent 2px solid;
+        font-weight: bold;
+        color: wheat;
+        transition: 0.2s ease-out;
+      }
+      .lunch_result {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
     <div class="mv_wrap">
-        <h1>오늘의 점심</h1>
-        <div class="result_wrap">
-            <button class="button">오늘은 뭐먹지...
-            </button>
-            <p class="lunch_result"></p>
-            
-        </div>
-        <script src="app.js"></script>
+      <h1>오늘의 점심</h1>
+      <div class="result_wrap">
+        <button class="button">오늘은 뭐먹지...</button>
+        <p class="lunch_result"></p>
+      </div>
     </div>
-</body>
+    <script>
+      const lunch = document.querySelector(".lunch_result"),
+        button = document.querySelector(".button");
+      const lunchList = [
+        "소노야",
+        "김밥이맛있는집",
+        "깁밥이야기",
+        "킹데리아",
+        "버거킹",
+        "라멘",
+        "또순이네",
+        "황금밥상",
+        "경원동 식당",
+        "예향",
+        "마요동",
+        "닭갈비",
+        "밥버거",
+        "맘스터치",
+        "신포우리만두",
+        "긴자료코",
+        "두끼",
+        "부부상회",
+        "계수나무",
+        "금암면옥",
+        "부옥당",
+        // 메뉴 추가
+      ];
+      lunch.innerText = "오늘의 점심은 뭘까.....";
+      function lunchHandler() {
+        const randLunchList =
+          lunchList[Math.floor(Math.random() * lunchList.length)];
+
+        const date = new Date();
+        const today = parseInt(date.getDay());
+
+        if (today === 3) {
+          delete lunchList[2];
+          if (randLunchList === undefined) {
+            lunch.innerText = `오늘 김밥이야기 쉬는날이네........`;
+          } else {
+            lunch.innerText = `오늘의 점심은.....${randLunchList}....`;
+          }
+        } else if (today === 4) {
+          delete lunchList[0];
+          if (randLunchList === undefined) {
+            lunch.innerText = "오늘 소노야 쉬는날이네..........";
+          } else {
+            lunch.innerText = `오늘의 점심은.....${randLunchList}....`;
+          }
+        } else {
+          lunch.innerText = `오늘의 점심은.....${randLunchList}....`;
+        }
+      }
+
+      button.addEventListener("click", lunchHandler);
+    </script>
+  </body>
 </html>
